@@ -422,9 +422,9 @@ namespace Grpc.Core
                 {
                     if (!hooksRegistered)
                     {
-#if NETSTANDARD1_5
+#if NETCOREAPP1_0
                         System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += (assemblyLoadContext) => { HandleShutdown(); };
-#else
+#elif !NETSTANDARD1_5
                         AppDomain.CurrentDomain.ProcessExit += (sender, eventArgs) => { HandleShutdown(); };
                         AppDomain.CurrentDomain.DomainUnload += (sender, eventArgs) => { HandleShutdown(); };
 #endif
